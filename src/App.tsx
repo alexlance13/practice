@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Switch, BrowserRouter, Redirect, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import FormPage from './pages/FormPage';
+import NotificationPage from './pages/NotificationPage';
+import TablePage from './pages/TablePage';
+import Notification from './containers/NotificationContainer';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/table" component={TablePage} />
+          <Route path="/form" component={FormPage} />
+          <Route path="/notification" component={NotificationPage} />
+          <Redirect to="/" />
+        </Switch>
+      </BrowserRouter>
+      <Notification />
+    </>
   );
 }
 
