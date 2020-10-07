@@ -5,10 +5,12 @@ import {
   START_FETCHING,
   STOP_FETCHING,
 } from '../actions/types';
-import { RowsType, colNameType } from '../../types/types';
-import MockData from '../../MOCK_DATA.json';
+import { RowsType, colNameType } from 'types/types';
+import axios from 'axios';
+import { notify } from 'containers/NotificationContainer';
+import { delay } from 'helpers';
 
-let data: Array<RowsType>;
+let usersForTable: Array<RowsType>;
 
 function getDataAction(data: Array<RowsType>) {
   return {
@@ -32,21 +34,21 @@ export function getData() {
   return async (dispatch: any) => {
     try {
       dispatch(startFetching());
-      const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-      await delay(2000);
-      // fake fetching from server
-      const res: any = { data: MockData };
-      data = res.data;
+      await delay(1000);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/users`);
+      usersForTable = res.data;
       dispatch(stopFetching());
-      dispatch(getDataAction(data));
+      dispatch(getDataAction(usersForTable));
     } catch (e) {
-      console.log('Getting data error, ', e);
+      dispatch(stopFetching());
+      console.error('Getting data error: ', e);
+      notify('Server is down.', 'error');
     }
   };
 }
 
 export function filterData(str: string) {
-  const filteredData = data.filter((row) => {
+  const filteredData = usersForTable.filter((row) => {
     let cel: colNameType;
     for (cel in row) {
       if (row[cel].toString().toLowerCase().includes(str.toLowerCase()))
@@ -65,7 +67,7 @@ export function sortData(
   sortingBy: 'asc' | 'desc' | undefined
 ) {
   const sortData = () => {
-    const dataCopy = data.concat();
+    const dataCopy = usersForTable.concat();
     if (colName === 'id')
       return dataCopy.sort((a: RowsType, b: RowsType) =>
         sortingBy === 'asc' ? b[colName] - a[colName] : a[colName] - b[colName]

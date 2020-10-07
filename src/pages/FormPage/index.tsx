@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import NavBar from '../components/NavBar';
-import Form from '../components/Form';
-import { IBlankState } from '../types/types';
-import { setStateFromInputs, sendData } from '../store/actions/form';
+import { Wrapper } from './styles';
+import NavBar from 'components/NavBar';
+import Form from 'components/Form';
+import { IBlankState } from 'types/types';
+import { setStateFromInputs, sendData } from 'store/actions/form';
 import { connect } from 'react-redux';
 import CircleLoader from 'react-spinners/CircleLoader';
 
@@ -33,8 +33,7 @@ const FormPage: React.FC<PropsType> = ({
   };
 
   const onSubmit = () => {
-    sendData();
-    console.log(blankState);
+    sendData(blankState);
   };
 
   return (
@@ -66,21 +65,15 @@ function mapDispatchToProps(dispatch: any) {
   return {
     setStateFromInputs: (key: string, value: any) =>
       dispatch(setStateFromInputs(key, value)),
-    sendData: () => dispatch(sendData()),
+    sendData: (data: IBlankState) => dispatch(sendData(data)),
   };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormPage);
 
-const Wrapper = styled.div`
-  background: linear-gradient(to bottom, #a9f1df, white);
-  min-height: 100vh;
-  font-weight: 600;
-`;
-
 interface PropsType {
   blankState: IBlankState;
   setStateFromInputs: (key: string, value: any) => void;
   loading: boolean;
-  sendData: () => void;
+  sendData: (data: IBlankState) => void;
 }

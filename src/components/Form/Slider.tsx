@@ -1,7 +1,7 @@
 import React from 'react';
 import Nouislider from 'nouislider-react';
 import 'nouislider/distribute/nouislider.css';
-import { salaryType } from '../types/types';
+import { salaryType } from 'types/types';
 
 const Slider: React.FC<PropsType> = ({ salary, onSalaryChange }) => {
   return (

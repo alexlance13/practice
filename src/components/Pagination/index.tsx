@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Wrapper } from './styles';
 
 const Pagination: React.FC<PropsType> = ({
   rowsPerPage,
@@ -78,10 +78,3 @@ type PropsType = {
   arrowClickHandler: (arrow: number) => void;
   setRowsPerPage: (rowsPerPage: number) => void;
 };
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template: 1fr / 2fr 1fr 1fr 1fr;
-  align-items: center;
-  user-select: none;
-`;

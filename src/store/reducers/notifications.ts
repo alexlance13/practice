@@ -4,7 +4,7 @@ import {
   SET_MESSAGE,
   SET_CLASSNAME,
 } from '../actions/types';
-import { initialStateForNotifications } from '../../types/types';
+import { initialStateForNotifications } from 'types/types';
 
 const initialState: initialStateForNotifications = {
   opacity: 0,

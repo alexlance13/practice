@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Select, Error } from './styles';
 
 const Nationallity: React.FC<PropsType> = ({
   onInputChangeHandler,
@@ -33,15 +33,3 @@ interface PropsType {
   register: any;
   errors: any;
 }
-
-const Error = styled.span`
-  font-weight: 400;
-  color: red;
-`;
-
-const Select = styled.select`
-  background-color: inherit;
-  display: block;
-  border-bottom: 1px solid #26a69a;
-  margin-bottom: 20px;
-`;

@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
-import Slider from '../Slider';
-import { salaryType } from '../../types/types';
+import { Wrapper, SubmitDiv } from './styles';
+import Slider from './Slider';
+import { salaryType } from 'types/types';
 import { useForm } from 'react-hook-form';
 import Technologies from './Technologies';
 import Name from './Name';
@@ -87,16 +87,3 @@ interface PropsType {
   onSalaryChange: (value: Array<string>) => void;
   onInputChangeHandler: (event: React.ChangeEvent<any>) => void;
 }
-
-const Wrapper = styled.div`
-  padding: 50px;
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-  }
-`;
-const SubmitDiv = styled.div`
-  float: right;
-`;

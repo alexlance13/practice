@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
-import { colNameType } from '../types/types';
-import styled from 'styled-components';
+import { colNameType } from 'types/types';
+import { TableHeader } from './styles';
 
 const Th: React.FC<PropsType> = ({
   onClickHandler,
@@ -40,8 +40,3 @@ type PropsType = {
   ) => void;
   sortedByField: string;
 };
-
-const TableHeader = styled.th`
-  cursor: pointer;
-  user-select: none;
-`;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { TechnoWrapper } from './styles';
 
 const Technologies: React.FC<PropsType> = ({
   onCheckboxesChangeHandler,
@@ -8,7 +8,7 @@ const Technologies: React.FC<PropsType> = ({
   return (
     <>
       <label>Select what technologies do you know</label>
-      <Wrapper className="input-field">
+      <TechnoWrapper className="input-field">
         <div>
           <p>
             <label>
@@ -133,7 +133,7 @@ const Technologies: React.FC<PropsType> = ({
             </label>
           </p>
         </div>
-      </Wrapper>
+      </TechnoWrapper>
     </>
   );
 };
@@ -144,8 +144,3 @@ interface PropsType {
   onCheckboxesChangeHandler: (id: string) => void;
   register: any;
 }
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template: 1fr / 1fr 1fr;
-`;

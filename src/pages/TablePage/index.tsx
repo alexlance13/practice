@@ -1,12 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from '../components/NavBar';
-import styled from 'styled-components';
-import Table from '../components/Table';
-import Pagination from '../components/Pagination';
-import { colNameType, RowsType } from '../types/types';
+import NavBar from 'components/NavBar';
+import { Wrapper, SearchDiv } from './styles';
+import Table from 'components/Table';
+import Pagination from 'components/Pagination';
+import { colNameType, RowsType, TableFieldsType } from 'types/types';
 import { connect } from 'react-redux';
-import { getData, filterData, sortData } from '../store/actions/table';
+import { getData, filterData, sortData } from 'store/actions/table';
 import CircleLoader from 'react-spinners/CircleLoader';
+
+const fields: Array<TableFieldsType> = [
+  {
+    title: 'Id',
+    value: 'id',
+  },
+  {
+    title: 'First name',
+    value: 'first_name',
+  },
+  {
+    title: 'Last name',
+    value: 'last_name',
+  },
+  {
+    title: 'Email',
+    value: 'email',
+  },
+  {
+    title: 'Gender',
+    value: 'gender',
+  },
+  {
+    title: 'Ip address',
+    value: 'ip_address',
+  },
+];
 
 const TablePage: React.FC<PropsType> = ({
   data,
@@ -21,7 +48,7 @@ const TablePage: React.FC<PropsType> = ({
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   const onClickHandler = (
     colName: colNameType,
@@ -59,9 +86,10 @@ const TablePage: React.FC<PropsType> = ({
         </label>
         <input type="text" id="search" onChange={onChangeHandler} />
       </SearchDiv>
-      {data.length ? (
+      {(data.length && (
         <>
           <Table
+            fields={fields}
             sortedByField={sortedByField}
             data={currentRows}
             onClickHandler={onClickHandler}
@@ -75,11 +103,10 @@ const TablePage: React.FC<PropsType> = ({
             currentPage={currentPage}
           />
         </>
-      ) : isLoading ? (
-        <CircleLoader css={'margin: 200px auto;'} size={150} />
-      ) : (
-        <h4>There is no users here</h4>
-      )}
+      )) ||
+        (isLoading && (
+          <CircleLoader css={'margin: 200px auto;'} size={150} />
+        )) || <h4>There is no users here</h4>}
     </Wrapper>
   );
 };
@@ -112,11 +139,3 @@ type PropsType = {
     sortingBy: 'asc' | 'desc' | undefined
   ) => void;
 };
-const Wrapper = styled.div`
-  background: linear-gradient(to bottom, #bbdefb, white);
-  min-height: 100vh;
-  padding-bottom: 15px;
-`;
-const SearchDiv = styled.div`
-  padding: 40px;
-`;

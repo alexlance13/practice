@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import { Wrapper } from './styles';
 
 const NavBar: React.FC = () => {
   return (
@@ -31,11 +31,3 @@ const NavBar: React.FC = () => {
 };
 
 export default NavBar;
-
-const Wrapper = styled.div`
-  padding: 0 15px;
-  user-select: none;
-  background: linear-gradient(to left, #d8b5ff, #1eae98);
-  background-color: #083d77;
-  font-weight: 700;
-`;

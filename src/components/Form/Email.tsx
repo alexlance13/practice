@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Error } from './styles';
 
 const Email: React.FC<PropsType> = ({
   onInputChangeHandler,
@@ -43,8 +43,3 @@ interface PropsType {
   register: any;
   errors: any;
 }
-
-const Error = styled.span`
-  font-weight: 400;
-  color: red;
-`;

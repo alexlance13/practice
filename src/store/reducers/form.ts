@@ -3,7 +3,7 @@ import {
   START_FETCHING,
   STOP_FETCHING,
 } from '../actions/types';
-import { IBlankState } from '../../types/types';
+import { IBlankState } from 'types/types';
 
 const initialState: { blankState: IBlankState; loading: boolean } = {
   blankState: {

@@ -4,8 +4,10 @@ import {
   STOP_FETCHING,
   SEND_DATA,
 } from '../actions/types';
-import { store } from './../../index';
-import { notify } from '../../containers/NotificationContainer';
+import { notify } from 'containers/NotificationContainer';
+import { delay } from 'helpers';
+import axios from 'axios';
+import { IBlankState } from 'types/types';
 
 export function setStateFromInputs(key: string, value: any) {
   return {
@@ -31,19 +33,21 @@ function sendDataAction(data: any) {
   };
 }
 
-export function sendData() {
+export function sendData(data: IBlankState) {
   return async (dispatch: any) => {
     try {
       dispatch(startFetching());
-      const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-      await delay(2000);
-      // fake sending to server
-      const res: any = { data: store.getState() };
+      await delay(1000);
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/cvs`, {
+        data,
+      });
       dispatch(stopFetching());
-      dispatch(sendDataAction(res.data));
-      notify('Your form will be considered by our recuiters', 'success');
+      dispatch(sendDataAction(res));
+      notify('Your CV will be considered by our recuiters', 'success');
     } catch (e) {
-      notify('Form saving error', 'error');
+      dispatch(stopFetching());
+      notify('Form sending error', 'error');
+      console.error(e);
     }
   };
 }
